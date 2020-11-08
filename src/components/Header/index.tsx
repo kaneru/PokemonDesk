@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import s from './Header.module.scss';
 import { ReactComponent as PokemonLogoSvg } from './assets/Logo.svg';
@@ -13,12 +14,12 @@ const MENU_ITEMS: IMenuItems[] = [
   {
     id: 0,
     value: 'Home',
-    link: '#',
+    link: '/',
   },
   {
     id: 1,
     value: 'Pokédex',
-    link: '#',
+    link: '/pokedex',
   },
   {
     id: 2,
@@ -41,9 +42,9 @@ const Header: React.FC = () => {
         </div>
         <nav className={s.menuWrapper}>
           {MENU_ITEMS.map(({ id, value, link }) => (
-            <a href={link} className={s.menuLink} key={id}>
+            <Link to={link} className={s.menuLink} key={id}>
               {value}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
