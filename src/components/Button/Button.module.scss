@@ -1,6 +1,8 @@
+@import '../../variables';
+
 .root {
   border: none;
-  background: #73d677;
+  background: $green;
   box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
   border-radius: 11px;
   height: 66px;
@@ -27,4 +29,12 @@
 
 .fullWidth {
   width: 100%;
+}
+
+.green {
+  background: $green;
+}
+
+.yellow {
+  background: $yellow;
 }
