@@ -1,15 +1,21 @@
 import React from 'react';
-import s from './App.module.scss';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import HomePage from './pages/Home';
+import PokedexPage from './pages/Pokedex';
 
 const App: React.FC = () => {
   return (
-    <div className={s.site}>
-      <Header />
-      <div className={s.content}>Hello, world! This is an App component.</div>
-      <Footer />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/pokedex">
+          <PokedexPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 

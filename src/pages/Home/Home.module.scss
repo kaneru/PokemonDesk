@@ -1,0 +1,9 @@
+@import '../../variables';
+
+.root {
+  background: linear-gradient(180deg, $third 0%, $primary 100%);
+}
+
+.content {
+  max-width: 516px;
+}
