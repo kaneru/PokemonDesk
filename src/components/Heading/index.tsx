@@ -4,6 +4,7 @@ import s from './Heading.module.scss';
 
 interface HeadingProps {
   tag?: keyof JSX.IntrinsicElements;
+  className?: string;
 }
 
 const Heading: React.FC<HeadingProps> = ({ children, tag: Wrapper = 'h2' }) => {
