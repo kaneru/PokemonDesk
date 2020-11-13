@@ -2,7 +2,6 @@ import React from 'react';
 
 import s from './Pokedex.module.scss';
 
-import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../components/Heading';
@@ -223,7 +222,6 @@ const pokemons = [
 const PokedexPage = () => {
   return (
     <div className={s.root}>
-      <Header />
       <Layout>
         <div className={s.wrapper}>
           <Heading tag="h3">
