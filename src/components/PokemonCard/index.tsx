@@ -31,8 +31,10 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, attack, defense, img, t
           </div>
         </div>
         <div className={s.labelWrap}>
-          {types.map((type, i) => (
-            <span className={cn(s.label, { [s.labelCyan]: type === 'water' }, { [s.labelGreen]: type === 'grass' })}>
+          {types.map((type) => (
+            <span
+              key={type}
+              className={cn(s.label, { [s.labelCyan]: type === 'water' }, { [s.labelGreen]: type === 'grass' })}>
               {capitalizeString(type)}
             </span>
           ))}
