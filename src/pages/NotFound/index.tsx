@@ -4,6 +4,7 @@ import { navigate } from 'hookrouter';
 import Button from '../../components/Button';
 
 import s from './NotFound.module.scss';
+import { LinkEnum } from '../../routes';
 
 const NotFoundPage = () => {
   return (
@@ -14,7 +15,7 @@ const NotFoundPage = () => {
         The rocket team <span className={s.blackText}>has won this time.</span>
       </div>
       <div className={s.btnWrapper}>
-        <Button color="yellow" onClick={() => navigate('/')} size="large" isFullWidth>
+        <Button color="yellow" onClick={() => navigate(LinkEnum.HOME)} size="large" isFullWidth>
           Return
         </Button>
       </div>
