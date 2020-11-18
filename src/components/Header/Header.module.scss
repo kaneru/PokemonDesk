@@ -8,6 +8,8 @@
   justify-content: space-between;
   min-height: 96px;
   padding: 0 128px;
+  position: relative;
+  z-index: 10;
 }
 
 .wrapper {
