@@ -1,35 +1,16 @@
 import { useState, useEffect } from 'react';
 import req from '../utils/request';
 
-interface IPokemonGlobal {
-  count: number;
-  limit: number;
-  offset: number;
-  pokemons: Array<IPokemonData>;
-  total: number;
-}
-
-interface IPokemonData {
-  name: string;
-  id: number;
-  img: string;
-  types: string[];
-  stats: {
-    attack: number;
-    defense: number;
-  };
-}
-
-const useData = (endpoint: string, query: object, deps: any[] = []) => {
-  const [data, setData] = useState<IPokemonGlobal>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+const useData = <T>(endpoint: string, query: object, deps: any[] = []) => {
+  const [data, setData] = useState<T | null>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = async (): Promise<void> => {
       setIsLoading(true);
       try {
-        const result = await req(endpoint, query);
+        const result = await req<T>(endpoint, query);
         setData(result);
       } catch (e) {
         setIsError(true);
