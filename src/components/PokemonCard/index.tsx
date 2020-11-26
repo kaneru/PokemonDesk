@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 
 import Heading from '../Heading';
-import capitalizeString from '../../utils/capitalizeString';
+import toCapitalizeFirstLetter from '../../utils/toCapitalizeFirstLetter';
 import s from './PokemonCard.module.scss';
 
 interface PokemonCardProps {
@@ -18,7 +18,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, attack, defense, img, t
     <div className={s.root}>
       <div className={s.infoWrap}>
         <Heading tag="h5" className={s.titleName}>
-          {capitalizeString(name)}
+          {toCapitalizeFirstLetter(name)}
         </Heading>
         <div className={s.statWrap}>
           <div className={s.statItem}>
@@ -35,7 +35,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, attack, defense, img, t
             <span
               key={type}
               className={cn(s.label, { [s.labelCyan]: type === 'water' }, { [s.labelGreen]: type === 'grass' })}>
-              {capitalizeString(type)}
+              {toCapitalizeFirstLetter(type)}
             </span>
           ))}
         </div>
