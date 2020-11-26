@@ -1,74 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import s from './Pokedex.module.scss';
 
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../components/Heading';
-
-interface Pokemon {
-  name: string;
-  id: number;
-  img: string;
-  types: string[];
-  stats: {
-    attack: number;
-    defense: number;
-  };
-}
-
-const usePokemons = () => {
-  const [data, setData] = useState<{ total: number; pokemons: Pokemon[] }>({ total: 0, pokemons: [] });
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
-        const result = await response.json();
-        setData(result);
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getPokemons();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
+import useData from '../../hook/getData';
 
 const PokedexPage = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState({});
 
-  if (isLoading) return <div>Loading...</div>;
+  const { data, isLoading, isError } = useData('getPokemons', query, [searchValue]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((s) => ({
+      ...s,
+      name: e.target.value,
+    }));
+  };
+
   if (isError) return <div>Something is wrong!</div>;
 
   return (
     <div className={s.root}>
-      <Layout>
+      <Layout className={s.centerLayout}>
         <div className={s.wrapper}>
           <Heading tag="h3">
-            {data.total} <b>Pokemons</b> for you to choose your favorite
+            {!isLoading && data?.total} <b>Pokemons</b> for you to choose your favorite
           </Heading>
+          <div className={s.searchWrapper}>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={handleSearchChange}
+              className={s.searchInput}
+              placeholder="Find your pokémon..."
+            />
+          </div>
           <div className={s.pokemonsGrid}>
-            {data.pokemons.map((pokemon) => (
-              <PokemonCard
-                key={pokemon.id}
-                name={pokemon.name}
-                attack={pokemon.stats.attack}
-                defense={pokemon.stats.defense}
-                img={pokemon.img}
-                types={pokemon.types}
-              />
-            ))}
+            {!isLoading &&
+              data?.pokemons.map((pokemon) => (
+                <PokemonCard
+                  key={pokemon.id}
+                  name={pokemon.name}
+                  attack={pokemon.stats.attack}
+                  defense={pokemon.stats.defense}
+                  img={pokemon.img}
+                  types={pokemon.types}
+                />
+              ))}
           </div>
         </div>
       </Layout>
