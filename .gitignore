@@ -2,3 +2,4 @@ node_modules/
 .vscode
 **/*.module.scss.d.ts
 .DS_Store
+dist/
